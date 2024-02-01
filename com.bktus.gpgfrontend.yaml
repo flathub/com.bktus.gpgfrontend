@@ -24,22 +24,6 @@ cleanup:
   - /lib/pkgconfig
 
 modules:
-  - name: boost
-    buildsystem: simple
-    build-commands:
-      - ./bootstrap.sh --prefix=${FLATPAK_DEST} --with-libraries=date_time,system
-      - ./b2 variant=release link=static runtime-link=shared cxxflags="$CXXFLAGS" linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS  install
-    sources:
-      - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2
-        sha256: 8681f175d4bdb26c52222665793eef08490d7758529330f98d3b29dd0735bccc
-    cleanup: 
-      - '*'
-  - name: libconfig++
-    sources:
-      - type: archive
-        url:  https://hyperrealm.github.io/libconfig/dist/libconfig-1.7.3.tar.gz
-        sha256: 545166d6cac037744381d1e9cc5a5405094e7bfad16a411699bcff40bbb31ee7
   - name: gpgfrontend
     buildsystem: cmake-ninja
     config-opts:
@@ -48,6 +32,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: f5e667607cee7e70ee6688b826539489ca11f6ac
+        commit: ee96f194f0f15306b8c2bc847df33af601261107
 
     
