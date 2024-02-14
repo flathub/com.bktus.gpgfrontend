@@ -26,10 +26,12 @@ cleanup:
 modules:
   - name: pinentry
     config-opts:
-      - --enable-pinentry-gnome3
+      - --enable-pinentry-qt
+      - --disable-doc
       - --disable-ncurses
       - --disable-fallback-curses
       - --disable-pinentry-curses
+      - --disable-pinentry-gnome3
       - --disable-pinentry-emacs
       - --disable-pinentry-gtk2
       - --disable-pinentry-qt5
@@ -37,9 +39,9 @@ modules:
       - --disable-pinentry-tqt
       - --disable-pinentry-fltk
     sources:
-      - type: archive
-        url: https://www.gnupg.org/ftp/gcrypt/pinentry/pinentry-1.2.1.tar.bz2
-        sha256: 457a185e5a85238fb945a955dc6352ab962dc8b48720b62fc9fa48c7540a4067
+      - type: git
+        url: https://github.com/gpg/pinentry.git
+        commit: 18e07ae47d205d2ef8b57ee2eaac09067027ce76
   - name: gpgfrontend
     buildsystem: cmake-ninja
     config-opts:
