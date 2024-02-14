@@ -24,6 +24,22 @@ cleanup:
   - /lib/pkgconfig
 
 modules:
+  - name: pinentry
+    config-opts:
+      - --enable-pinentry-gnome3
+      - --disable-ncurses
+      - --disable-fallback-curses
+      - --disable-pinentry-curses
+      - --disable-pinentry-emacs
+      - --disable-pinentry-gtk2
+      - --disable-pinentry-qt5
+      - --disable-pinentry-tty
+      - --disable-pinentry-tqt
+      - --disable-pinentry-fltk
+    sources:
+      - type: archive
+        url: https://www.gnupg.org/ftp/gcrypt/pinentry/pinentry-1.2.1.tar.bz2
+        sha256: 457a185e5a85238fb945a955dc6352ab962dc8b48720b62fc9fa48c7540a4067
   - name: gpgfrontend
     buildsystem: cmake-ninja
     config-opts:
@@ -32,6 +48,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: f823bebb865ef59e391bdfb521e3b341117dd924
+        commit: da6eb24cbca1980ff00041f5dea6bbcee96bb7b8
 
     
