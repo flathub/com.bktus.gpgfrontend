@@ -1,6 +1,6 @@
 app-id: com.bktus.gpgfrontend
 runtime: org.kde.Platform
-runtime-version: "6.5"
+runtime-version: "6.6"
 sdk: org.kde.Sdk
 command: GpgFrontend
 
@@ -32,6 +32,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 94819b52a9a6b8426880f2ceb86cc6b32c518101
+        commit: f909f2c4c35b187eb165ec5545e35d54c6d92bf3
 
     
