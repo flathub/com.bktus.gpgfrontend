@@ -32,6 +32,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 6a7a9ae6201e52b5c935d3d1bdf3fa43e1712c7a
+        commit: f909f2c4c35b187eb165ec5545e35d54c6d92bf3
 
     
