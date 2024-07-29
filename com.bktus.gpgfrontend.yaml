@@ -24,14 +24,32 @@ cleanup:
   - /lib/pkgconfig
 
 modules:
+  - name: gpgfrontend-sdk
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DGPGFRONTEND_BUILD_TYPE_FULL_SDK=ON
+    sources:
+      - type: git
+        url: https://github.com/saturneric/GpgFrontend.git
+        commit: f99d26f91e99dea846580ae2910fdf9a88cb82cc
+  - name: gpgfrontend-modules
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+    sources:
+      - type: git
+        url: https://github.com/saturneric/GpgFrontend-Modules.git
+        commit: 8d7cef2ad0842af9271df8a97cc966ff2fad49fe
   - name: gpgfrontend
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
+      - -DGPGFRONTEND_BUILD_TYPE_ONLY_APPLICATION=ON
       - -DGPGFRONTEND_GENERATE_LINUX_INSTALL_SOFTWARE=ON
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 71b9ea8d3a902d10890ca8d327d8275a0f0f349d
+        commit: f99d26f91e99dea846580ae2910fdf9a88cb82cc
 
     
