@@ -24,14 +24,6 @@ cleanup:
   - /lib/pkgconfig
 
 modules:
-  - name: mimalloc
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DMI_SECURE=ON
-    sources:
-      - type: git
-        url: https://github.com/microsoft/mimalloc.git
-        tag: v2.1.7 
   - name: googletest
     buildsystem: cmake-ninja
     config-opts:
@@ -48,7 +40,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 8e99ff11a60b5e4686776fba39709bee22d96b92
+        commit: 795a81bd1edad59ef51e73157b5ad68cfa30e328
   - name: gpgfrontend-modules
     buildsystem: cmake-ninja
     config-opts:
@@ -66,6 +58,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 8e99ff11a60b5e4686776fba39709bee22d96b92
+        commit: 795a81bd1edad59ef51e73157b5ad68cfa30e328
 
     
