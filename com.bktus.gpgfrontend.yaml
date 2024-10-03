@@ -40,7 +40,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 795a81bd1edad59ef51e73157b5ad68cfa30e328
+        commit: d82bbd6eb479770bea7a20f6f9375791fc8ed1fa
   - name: gpgfrontend-modules
     buildsystem: cmake-ninja
     config-opts:
@@ -48,7 +48,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend-Modules.git
-        commit: 2be9cf21aef39a34a807eb29b29eec726ec68f97
+        commit: 5b5e450b8f9e7bfc804c0e7a6d9287a76b0bcff0
   - name: gpgfrontend
     buildsystem: cmake-ninja
     config-opts:
@@ -58,6 +58,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 795a81bd1edad59ef51e73157b5ad68cfa30e328
+        commit: d82bbd6eb479770bea7a20f6f9375791fc8ed1fa
 
     
