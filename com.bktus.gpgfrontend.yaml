@@ -14,8 +14,8 @@ finish-args:
   - --filesystem=~/.gnupg
 
 cleanup:
-  - '*.a'
-  - '*.la'
+  - "*.a"
+  - "*.la"
   - /share/doc
   - /share/gtk-doc
   - /share/man
@@ -31,7 +31,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/google/googletest.git
-        tag: v1.15.0 
+        tag: v1.15.2
   - name: gpgfrontend-sdk
     buildsystem: cmake-ninja
     config-opts:
@@ -40,7 +40,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: d82bbd6eb479770bea7a20f6f9375791fc8ed1fa
+        commit: 64c7fe9b1bdb6074e1f68e6dd6f030c1387669ef
   - name: gpgfrontend-modules
     buildsystem: cmake-ninja
     config-opts:
@@ -48,7 +48,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend-Modules.git
-        commit: 5b5e450b8f9e7bfc804c0e7a6d9287a76b0bcff0
+        commit: ec7541da6532619225e580e2b76185ef6ab2fbc1
   - name: gpgfrontend
     buildsystem: cmake-ninja
     config-opts:
@@ -58,6 +58,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: d82bbd6eb479770bea7a20f6f9375791fc8ed1fa
-
-    
+        commit: 64c7fe9b1bdb6074e1f68e6dd6f030c1387669ef
