@@ -1,6 +1,6 @@
 app-id: com.bktus.gpgfrontend
 runtime: org.kde.Platform
-runtime-version: "6.7"
+runtime-version: "6.8"
 sdk: org.kde.Sdk
 command: GpgFrontend
 
@@ -32,6 +32,17 @@ modules:
       - type: git
         url: https://github.com/google/googletest.git
         tag: v1.15.2
+  - name: gpgme
+    config-opts:
+      - --enable-languages=cpp
+    sources:
+      - type: archive
+        url: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.24.2.tar.bz2
+        sha256: e11b1a0e361777e9e55f48a03d89096e2abf08c63d84b7017cfe1dce06639581
+        x-checker-data:
+          type: anitya
+          project-id: 1239
+          url-template: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-$version.tar.bz2
   - name: gpgfrontend-sdk
     buildsystem: cmake-ninja
     config-opts:
@@ -40,7 +51,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 8dfe4599860656b90fe8fb7f855f25233cc25912
+        commit: 0261c780976d8ac650006916dcc2688582f4922e
   - name: gpgfrontend-modules
     buildsystem: cmake-ninja
     config-opts:
@@ -48,7 +59,7 @@ modules:
     sources:
       - type: git
         url: https://git.bktus.com/GpgFrontend/GpgFrontend-Modules.git
-        commit: 6b0ca127c868e0c132dd79c59ea038b60b722e33
+        commit: c2d072e60a83ec2ce17fb4e3168b99b001bb5ae9
   - name: gpgfrontend
     buildsystem: cmake-ninja
     config-opts:
@@ -58,4 +69,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 8dfe4599860656b90fe8fb7f855f25233cc25912
+        commit: 0261c780976d8ac650006916dcc2688582f4922e
