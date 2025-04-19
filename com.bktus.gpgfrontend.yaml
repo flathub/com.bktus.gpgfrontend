@@ -8,10 +8,10 @@ finish-args:
   - --share=ipc
   - --socket=fallback-x11
   - --socket=wayland
-  - --socket=gpg-agent
+  # - --socket=gpg-agent
   - --device=dri
   - --share=network
-  - --filesystem=~/.gnupg
+  # - --filesystem=~/.gnupg
 
 cleanup:
   - "*.a"
@@ -43,6 +43,24 @@ modules:
           type: anitya
           project-id: 1239
           url-template: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-$version.tar.bz2
+  - name: pinentry
+    buildsystem: autotools
+    config-opts:
+      - --enable-maintainer-mode
+      - --enable-pinentry-qt5
+      - --disable-pinentry-gnome3
+      - --disable-pinentry-gtk2
+      - --disable-ncurses
+      - --disable-fallback-curses
+      - --disable-pinentry-curses
+      - --disable-pinentry-emacs
+      - --disable-pinentry-fltk
+      - --disable-pinentry-tqt
+      - --disable-pinentry-tty
+    sources:
+      - type: git
+        url: https://dev.gnupg.org/source/pinentry.git
+        commit: aaf5d44f26e39f57bb47ae09dd3d575fcc51d9f5 # v1.2.0
   - name: gpgfrontend-sdk
     buildsystem: cmake-ninja
     config-opts:
