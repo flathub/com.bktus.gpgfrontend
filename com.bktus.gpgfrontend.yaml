@@ -2,7 +2,7 @@ app-id: com.bktus.gpgfrontend
 runtime: org.kde.Platform
 runtime-version: "6.8"
 sdk: org.kde.Sdk
-command: GpgFrontend
+command: gpgfrontend
 
 finish-args:
   - --share=ipc
@@ -61,30 +61,11 @@ modules:
       - type: git
         url: https://dev.gnupg.org/source/pinentry.git
         commit: dd8894fa60c1f1c08ecc50ba4657580abc348347 # v1.3.1
-  - name: gpgfrontend-sdk
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DGPGFRONTEND_BUILD_TYPE_FULL_SDK=ON
-    sources:
-      - type: git
-        url: https://github.com/saturneric/GpgFrontend.git
-        commit: e45f112ea731a1818240ea5402549db2acc2248b
-  - name: gpgfrontend-modules
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
-    sources:
-      - type: git
-        url: https://git.bktus.com/GpgFrontend/GpgFrontend-Modules.git
-        commit: e348231f935e925c3ea2d7077ca7abefd106dac0
   - name: gpgfrontend
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DGPGFRONTEND_BUILD_TYPE_ONLY_APPLICATION=ON
-      - -DGPGFRONTEND_GENERATE_LINUX_INSTALL_SOFTWARE=ON
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: e45f112ea731a1818240ea5402549db2acc2248b
+        commit: be4cb8e0f9ab4cd1e41979de8809b04211c116f3
