@@ -1,6 +1,6 @@
 app-id: com.bktus.gpgfrontend
 runtime: org.kde.Platform
-runtime-version: '6.8'
+runtime-version: "6.8"
 sdk: org.kde.Sdk
 command: gpgfrontend
 
@@ -13,8 +13,8 @@ finish-args:
   - --filesystem=~/.gnupg:rw
 
 cleanup:
-  - '*.a'
-  - '*.la'
+  - "*.a"
+  - "*.la"
   - /share/doc
   - /share/gtk-doc
   - /share/man
@@ -33,11 +33,11 @@ modules:
         tag: v1.15.2
   - name: gpgme
     config-opts:
-      - --enable-languages=cpp
+      - --enable-languages=cl
     sources:
       - type: archive
-        url: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.24.3.tar.bz2
-        sha256: bfc17f5bd1b178c8649fdd918956d277080f33df006a2dc40acdecdce68c50dd
+        url: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-2.0.0.tar.bz2
+        sha256: ddf161d3c41ff6a3fcbaf4be6c6e305ca4ef1cc3f1ecdfce0c8c2a167c0cc36d
         x-checker-data:
           type: anitya
           project-id: 1239
@@ -68,4 +68,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: be4cb8e0f9ab4cd1e41979de8809b04211c116f3
+        commit: 0566c49f98f4981b0a2412c48208991b0ebb2f05
