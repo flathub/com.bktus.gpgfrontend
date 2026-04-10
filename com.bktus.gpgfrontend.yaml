@@ -60,6 +60,16 @@ modules:
       - type: archive
         url: https://www.openssl.org/source/openssl-3.6.2.tar.gz
         sha256: aaf51a1fe064384f811daeaeb4ec4dce7340ec8bd893027eee676af31e83a04f
+    buildsystem: simple
+    build-commands:
+      - |
+        ./Configure --prefix=/app \
+                    --libdir=lib \
+                    linux-x86_64 \
+                    shared \
+                    '-Wl,-rpath,$(LIBRPATH)'
+      - make -j$(nproc)
+      - make install_sw
     cleanup:
       - /bin
       - /share/man
