@@ -63,11 +63,10 @@ modules:
     buildsystem: simple
     build-commands:
       - |
-        ./Configure --prefix=/app \
-                    --libdir=lib \
-                    linux-x86_64 \
-                    shared \
-                    '-Wl,-rpath,$(LIBRPATH)'
+        ./config --prefix=/app \
+                 --libdir=lib \
+                 shared \
+                 '-Wl,-rpath,$(LIBRPATH)'
       - make -j$(nproc)
       - make install_sw
     cleanup:
