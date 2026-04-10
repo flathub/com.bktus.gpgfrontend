@@ -59,7 +59,8 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
+      - -DGPGFRONTEND_USE_SYSTEM_OPENSSL=ON
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: fc3a0e25e70bbeed0401df2b00d7d4b1e53fa955
+        commit: ef097c04f4f86f9afc19fe3dc493c49edebb878b
