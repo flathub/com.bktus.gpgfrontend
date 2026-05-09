@@ -4,6 +4,9 @@ runtime-version: "6.10"
 sdk: org.kde.Sdk
 command: gpgfrontend
 
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+
 finish-args:
   - --share=ipc
   - --socket=fallback-x11
@@ -55,33 +58,28 @@ modules:
         url: https://www.gnupg.org/ftp/gcrypt/pinentry/pinentry-1.3.2.tar.bz2
         sha256: 8e986ed88561b4da6e9efe0c54fa4ca8923035c99264df0b0464497c5fb94e9e
 
-  # GpgFrontend needs OpenSSL 3.6+ for the new provider API, and I can't find
-  # the proper version in the runtime, so I build it myself. If the runtime ever
-  # updates to 3.6.2, this module can be removed.
-  - name: openssl
+  - name: libsodium
+    buildsystem: autotools
+    config-opts:
+      - --disable-static
+      - --enable-shared
     sources:
       - type: archive
-        url: https://www.openssl.org/source/openssl-3.6.2.tar.gz
-        sha256: aaf51a1fe064384f811daeaeb4ec4dce7340ec8bd893027eee676af31e83a04f
-    buildsystem: simple
-    build-commands:
-      - |
-        ./config --prefix=/app \
-                 --libdir=lib \
-                 shared \
-                 '-Wl,-rpath,$(LIBRPATH)'
-      - make -j$(nproc)
-      - make install_sw
-    cleanup:
-      - /bin
-      - /share/man
+        url: https://github.com/jedisct1/libsodium/releases/download/1.0.22-RELEASE/libsodium-1.0.22.tar.gz
+        sha256: adbdd8f16149e81ac6078a03aca6fc03b592b89ef7b5ed83841c086191be3349
 
   - name: gpgfrontend
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DGPGFRONTEND_USE_SYSTEM_OPENSSL=ON
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin
+      env:
+        CARGO_NET_OFFLINE: "true"
+        CARGO_HOME: /run/build/gpgfrontend/cargo
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: f863cb01a2ce6659edecacdc0770c93cb130a1cb
+        commit: 44a8b929192d1cb6cb152c5a11abe78c7abdf7a1
+
+      - cargo-sources.json
