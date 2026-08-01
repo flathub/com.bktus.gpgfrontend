@@ -72,6 +72,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
+      - -DGPGFRONTEND_BUILD_STABLE=ON
     build-options:
       append-path: /usr/lib/sdk/rust-stable/bin
       env:
