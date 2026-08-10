@@ -1,6 +1,6 @@
 app-id: com.bktus.gpgfrontend
 runtime: org.kde.Platform
-runtime-version: "6.10"
+runtime-version: "6.11"
 sdk: org.kde.Sdk
 command: gpgfrontend
 
@@ -72,6 +72,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
+      - -DGPGFRONTEND_BUILD_STABLE=ON
     build-options:
       append-path: /usr/lib/sdk/rust-stable/bin
       env:
@@ -80,6 +81,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: e1171cb476a27cbbf7d93e32ee5328b128fcb9f4
+        commit: 2e977c81d9a6d9298b5d17a1649cb866e0b6fc6c
 
       - cargo-sources.json
