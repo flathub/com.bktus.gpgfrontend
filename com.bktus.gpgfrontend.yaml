@@ -73,6 +73,12 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DGPGFRONTEND_BUILD_STABLE=ON
+      - -DGPGFRONTEND_BUILD_MODE=release
+      # flatpak-builder checks out a detached HEAD, so the branch is not detectable
+      - -DGPGFRONTEND_BUILD_REF=main
+      # Keep module native binding OFF (default): flatpak-builder strips binaries
+      # after install, which would invalidate FILE_SHA256 module bindings.
+      - -DGPGFRONTEND_INTEGRATED_MODULE_NATIVE_BINDING=OFF
     build-options:
       append-path: /usr/lib/sdk/rust-stable/bin
       env:
@@ -81,6 +87,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 750c8b401b649187572ef71a2eb3506d18fab4da
+        commit: 9c57bceb27b01c34dd918329ca4aa93db80e4a86
 
       - cargo-sources.json
