@@ -76,6 +76,8 @@ modules:
       - -DGPGFRONTEND_BUILD_MODE=release
       # flatpak-builder checks out a detached HEAD, so the branch is not detectable
       - -DGPGFRONTEND_BUILD_REF=main
+      # Flatpak is a sandboxed install (installed | portable | sandbox)
+      - -DGPGFRONTEND_BUILD_FLAVOR=sandbox
       # Keep module native binding OFF (default): flatpak-builder strips binaries
       # after install, which would invalidate FILE_SHA256 module bindings.
       - -DGPGFRONTEND_INTEGRATED_MODULE_NATIVE_BINDING=OFF
@@ -87,6 +89,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 9c57bceb27b01c34dd918329ca4aa93db80e4a86
+        commit: f60e2828473b3529d8e8975eaa9aa1959abdf6ab
 
       - cargo-sources.json
