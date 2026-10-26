@@ -26,16 +26,6 @@ cleanup:
   - "*.a"
 
 modules:
-  - name: googletest
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_SHARED_LIBS=ON
-    sources:
-      - type: git
-        url: https://github.com/google/googletest.git
-        tag: v1.17.0
-        commit: 52eb8108c5bdec04579160ae17225d66034bd723
-
   - name: pinentry
     buildsystem: autotools
     config-opts:
@@ -76,8 +66,8 @@ modules:
       - -DGPGFRONTEND_BUILD_MODE=release
       # flatpak-builder checks out a detached HEAD, so the branch is not detectable
       - -DGPGFRONTEND_BUILD_REF=main
-      # Flatpak is a sandboxed install (installed | portable | sandbox)
-      - -DGPGFRONTEND_BUILD_FLAVOR=sandbox
+      # Flatpak is a specific install (installed | portable | sandbox | flatpak)
+      - -DGPGFRONTEND_BUILD_FLAVOR=flatpak
       # Keep module native binding OFF (default): flatpak-builder strips binaries
       # after install, which would invalidate FILE_SHA256 module bindings.
       - -DGPGFRONTEND_INTEGRATED_MODULE_NATIVE_BINDING=OFF
@@ -89,6 +79,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 60386d3a896b715116389ea844f230afc20bf37d
+        commit: 60e0ff1c7ef75517204fabe24b03260f01c3acbb
 
       - cargo-sources.json
