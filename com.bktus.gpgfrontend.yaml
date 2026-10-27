@@ -86,6 +86,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: bda8415ce0107dd2419c300f7271768147b40e95
+        commit: fe91dbb041c1b06bb529430478aea0ea7eb72865
 
       - cargo-sources.json
