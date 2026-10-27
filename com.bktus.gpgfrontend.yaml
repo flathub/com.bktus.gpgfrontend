@@ -1,7 +1,11 @@
 app-id: com.bktus.gpgfrontend
 runtime: org.kde.Platform
+# Keep base-version in sync with runtime-version
 runtime-version: "6.11"
 sdk: org.kde.Sdk
+# The KDE runtime does not ship QtWebEngine; it is provided by this BaseApp
+base: io.qt.qtwebengine.BaseApp
+base-version: "6.11"
 command: gpgfrontend
 
 sdk-extensions:
@@ -24,6 +28,9 @@ cleanup:
   - /share/man
   - "*.la"
   - "*.a"
+
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
 
 modules:
   - name: pinentry
