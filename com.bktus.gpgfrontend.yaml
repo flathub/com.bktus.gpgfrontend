@@ -62,15 +62,15 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DGPGFRONTEND_BUILD_STABLE=ON
       - -DGPGFRONTEND_BUILD_MODE=release
+      - -DGPGFRONTEND_BUILD_FLAVOR=flatpak
       # flatpak-builder checks out a detached HEAD, so the branch is not detectable
       - -DGPGFRONTEND_BUILD_REF=main
-      # Flatpak is a specific install (installed | portable | sandbox | flatpak)
-      - -DGPGFRONTEND_BUILD_FLAVOR=flatpak
       # Keep module native binding OFF (default): flatpak-builder strips binaries
       # after install, which would invalidate FILE_SHA256 module bindings.
       - -DGPGFRONTEND_INTEGRATED_MODULE_NATIVE_BINDING=OFF
+      # Keep module web engine ON to allow web engine features to work in the sandbox.
+      - -DGPGFRONTEND_MODULES_WEB_ENGINE=ON
     build-options:
       append-path: /usr/lib/sdk/rust-stable/bin
       env:
@@ -79,6 +79,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
-        commit: 8c875e99e5aaba60f231e8e6c8cb74776ea8d22f
+        commit: bda8415ce0107dd2419c300f7271768147b40e95
 
       - cargo-sources.json
