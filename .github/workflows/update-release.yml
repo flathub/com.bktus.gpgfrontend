@@ -3,14 +3,19 @@
 # the tag's Cargo.lock (scripts/update-release.sh). Flathub's buildbot then
 # test-builds the pull request; merging it publishes the update.
 #
+# Flathub asks custom update workflows to run at most about once a week, to
+# use only the flathub organisation's actions and peter-evans/create-pull-request,
+# and to opt out of its global External Data Checker (flathub.json):
+# https://docs.flathub.org/docs/for-app-authors/maintenance
+#
 # By hand: run it with a version to propose that release instead of the
-# latest one, or as a dry run to see the change without pushing anything.
+# latest one, or as a dry run to see the change without opening anything.
 
 name: Update Release
 
 on:
   schedule:
-    - cron: "41 */6 * * *"
+    - cron: "41 6 * * 1"
   workflow_dispatch:
     inputs:
       version:
@@ -31,6 +36,7 @@ concurrency:
 
 jobs:
   update:
+    if: github.repository_owner == 'flathub'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
@@ -48,15 +54,27 @@ jobs:
           python3 -m venv "${RUNNER_TEMP}/venv"
           "${RUNNER_TEMP}/venv/bin/pip" install -q aiohttp tomlkit
 
-      # A pull request opened with GITHUB_TOKEN needs the organization to let
-      # Actions create pull requests; FLATHUB_PR_TOKEN (a fine-grained token
-      # with contents and pull requests write on this repository) stands in
-      # where it does not.
-      - name: Propose the latest stable release
+      - name: Update to the latest stable release
+        id: update
         env:
-          GH_TOKEN: ${{ secrets.FLATHUB_PR_TOKEN || github.token }}
+          GH_TOKEN: ${{ github.token }}
           VERSION: ${{ inputs.version }}
-          DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -euo pipefail
           PYTHON="${RUNNER_TEMP}/venv/bin/python" scripts/update-release.sh
+          git --no-pager diff
+
+      - name: Open the pull request
+        if: steps.update.outputs.branch != '' && !inputs.dry_run
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          base: master
+          branch: ${{ steps.update.outputs.branch }}
+          add-paths: |
+            com.bktus.gpgfrontend.yaml
+            cargo-sources.json
+          commit-message: ${{ steps.update.outputs.commit-message }}
+          title: ${{ steps.update.outputs.title }}
+          body: ${{ steps.update.outputs.body }}
+          sign-commits: true
+          delete-branch: true
