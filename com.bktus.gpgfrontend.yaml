@@ -86,6 +86,9 @@ modules:
     sources:
       - type: git
         url: https://github.com/saturneric/GpgFrontend.git
+        # The version is read from git tags (cmake/GitVersion.cmake); a shallow
+        # fetch has none, and the build would call itself 0.0.0-unknown
+        disable-shallow-clone: true
         commit: 69169d3e12eb93dfccba40cffb51ea9b012a4377
 
       - cargo-sources.json
