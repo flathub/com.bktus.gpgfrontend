@@ -67,6 +67,10 @@ modules:
 
   - name: gpgfrontend
     buildsystem: cmake-ninja
+    # Build out of source: in-source, ${CMAKE_BINARY_DIR}/src is the same path
+    # as ${CMAKE_SOURCE_DIR}/src, which the email module drops from vmime's
+    # include path, and vmime's generated config.hpp is lost with it.
+    builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DGPGFRONTEND_BUILD_MODE=release
