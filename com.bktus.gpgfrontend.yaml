@@ -67,6 +67,10 @@ modules:
 
   - name: gpgfrontend
     buildsystem: cmake-ninja
+    # Build out of source: in-source, ${CMAKE_BINARY_DIR}/src is the same path
+    # as ${CMAKE_SOURCE_DIR}/src, which the email module drops from vmime's
+    # include path, and vmime's generated config.hpp is lost with it.
+    builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DGPGFRONTEND_BUILD_MODE=release
@@ -89,6 +93,7 @@ modules:
         # The version is read from git tags (cmake/GitVersion.cmake); a shallow
         # fetch has none, and the build would call itself 0.0.0-unknown
         disable-shallow-clone: true
-        commit: 69169d3e12eb93dfccba40cffb51ea9b012a4377
+        tag: v2.2.5
+        commit: d1186f54cf0594705dedea2baec3078e4c2dd819
 
       - cargo-sources.json
